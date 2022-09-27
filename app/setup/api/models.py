@@ -1,3 +1,4 @@
+from app.models import Genre
 from flask_restx import fields, Model
 
 from app.setup.api import api
@@ -20,5 +21,7 @@ movie: Model = api.model('Фильм', {
     'year': fields.Integer(required=True, example=1999),
     'rating': fields.Float(required=True, example=6.9),
     'genre_id': fields.Integer(required=True, example=1),
-    'director_id': fields.Integer(required=True, example=1)
+    'genre': fields.Nested(genre),
+    'director_id': fields.Integer(required=True, example=1),
+    'director': fields.Nested(director)
 })
