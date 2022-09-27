@@ -1,6 +1,6 @@
 import pytest
 
-from project.models import Genre
+from app.models import Genre
 
 
 class TestGenresView:
