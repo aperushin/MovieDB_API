@@ -9,7 +9,7 @@ class GenresDAO(BaseDAO[Genre]):
 
 
 class DirectorDAO(BaseDAO[Director]):
-    __model__ = Genre
+    __model__ = Director
 
 
 class MovieDAO(BaseDAO[Movie]):
