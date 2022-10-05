@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 class BaseConfig:
-    SECRET_KEY = os.getenv('SECRET_KEY', 'you-will-never-guess')
+    SECRET_KEY = os.getenv('SECRET_KEY', '&Ph1n9z00V1w')
     JSON_AS_ASCII = False
 
     ITEMS_PER_PAGE = 12
@@ -17,8 +17,10 @@ class BaseConfig:
     TOKEN_EXPIRE_MINUTES = 15
     TOKEN_EXPIRE_DAYS = 130
 
-    PWD_HASH_SALT = base64.b64decode("salt")
+    PWD_HASH_SALT = b'xx8peF35dQvn9nuTgF'
     PWD_HASH_ITERATIONS = 100_000
+    HASH_ALGORYTHM = 'sha256'
+    JWT_ALGORYTHM = 'HS256'
 
     RESTX_JSON = {
         'ensure_ascii': False,

@@ -1,7 +1,9 @@
+from flask_sqlalchemy import BaseQuery
+from sqlalchemy.exc import NoResultFound
+from werkzeug.exceptions import NotFound
+
 from app.dao.base import BaseDAO
 from app.models import Genre, Director, Movie, User
-from flask_sqlalchemy import BaseQuery
-from werkzeug.exceptions import NotFound
 
 
 class GenresDAO(BaseDAO[Genre]):
@@ -32,3 +34,15 @@ class MovieDAO(BaseDAO[Movie]):
 
 class UserDAO(BaseDAO[User]):
     __model__ = User
+
+    def get_by_email(self, email: str) -> User | None:
+        try:
+            user = self._db_session.query(User).filter_by(email=email).one()
+        except NoResultFound:
+            return None
+        return user
+
+    def create(self, user: User):
+        self._db_session.add(user)
+        self._db_session.commit()
+        return user
