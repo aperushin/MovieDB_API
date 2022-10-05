@@ -64,9 +64,10 @@ def auth_required(func):
             abort(401)
 
         token = auth_data.split('Bearer ')[-1]
+        user_data = decode_token(token)
 
-        if not decode_token(token):
+        if not user_data:
             abort(401)
-        return func(*args, **kwargs)
+        return func(user_data=user_data, *args, **kwargs)
 
     return wrapper

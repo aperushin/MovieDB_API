@@ -32,7 +32,7 @@ class AuthViews(Resource):
         if not is_correct_password:
             raise NotAuthorized('Incorrect password')
 
-        user_data = {'email': user.email}
+        user_data = {'email': user.email, 'user_id': user.id}
 
         access_token = generate_token(user_data)
         refresh_token = generate_token(user_data, refresh=True)

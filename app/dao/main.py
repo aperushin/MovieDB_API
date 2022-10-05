@@ -46,3 +46,7 @@ class UserDAO(BaseDAO[User]):
         self._db_session.add(user)
         self._db_session.commit()
         return user
+
+    def update(self, uid: int, user_data: dict):
+        self._db_session.query(User).filter_by(id=uid).update(user_data)
+        self._db_session.commit()

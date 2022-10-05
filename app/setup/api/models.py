@@ -1,4 +1,3 @@
-from app.models import Genre
 from flask_restx import fields, Model
 
 from app.setup.api import api
@@ -24,4 +23,12 @@ movie: Model = api.model('Фильм', {
     'genre': fields.Nested(genre),
     'director_id': fields.Integer(required=True, example=1),
     'director': fields.Nested(director)
+})
+
+user: Model = api.model('Пользователь', {
+    'id': fields.Integer(required=True, example=1),
+    'name': fields.String(max_length=100, example='John'),
+    'surname': fields.String(max_length=100, example='Smith'),
+    'email': fields.String(required=True, max_length=100, example='a@a.com'),
+    'favorite_genre': fields.Integer(example=1)
 })
