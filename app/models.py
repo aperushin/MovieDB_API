@@ -41,4 +41,13 @@ class User(models.Base):
     password = Column(String(100), nullable=False)
     name = Column(String(100))
     surname = Column(String(100))
-    favorite_genre = Column(Integer, ForeignKey(f'{Genre.__tablename__}.id'))
+    favourite_genre = Column(ForeignKey(f'{Genre.__tablename__}.id'))
+
+
+class UserMovie(models.Base):
+    __tablename__ = 'favorite_movies'
+
+    id = None
+    user_id = Column(ForeignKey(f'{User.__tablename__}.id'), primary_key=True)
+    movie_id = Column(ForeignKey(f'{Movie.__tablename__}.id'), primary_key=True)
+    movie = relationship(Movie)

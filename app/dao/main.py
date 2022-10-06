@@ -3,7 +3,7 @@ from sqlalchemy.exc import NoResultFound
 from werkzeug.exceptions import NotFound
 
 from app.dao.base import BaseDAO
-from app.models import Genre, Director, Movie, User
+from app.models import Genre, Director, Movie, User, UserMovie
 
 
 class GenresDAO(BaseDAO[Genre]):
@@ -49,4 +49,22 @@ class UserDAO(BaseDAO[User]):
 
     def update(self, uid: int, user_data: dict):
         self._db_session.query(User).filter_by(id=uid).update(user_data)
+        self._db_session.commit()
+
+
+class UserMovieDAO(BaseDAO[UserMovie]):
+    __model__ = UserMovie
+
+    def add(self, user_movie: UserMovie):
+        self._db_session.add(user_movie)
+        self._db_session.commit()
+
+    def get_by_user_id(self, uid: int):
+        return self._db_session.query(UserMovie).filter_by(user_id=uid).all()
+
+    def get_item(self, user_id: int, movie_id: int):
+        return self._db_session.query(UserMovie).filter_by(user_id=user_id, movie_id=movie_id).one()
+
+    def delete(self, user_movie: UserMovie):
+        self._db_session.delete(user_movie)
         self._db_session.commit()

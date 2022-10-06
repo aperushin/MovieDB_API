@@ -8,7 +8,7 @@ from app.exceptions import BadRequest, NotAuthorized
 api = Namespace('auth')
 
 
-@api.route('/login')
+@api.route('/login/')
 class AuthViews(Resource):
     def post(self):
         """
@@ -58,7 +58,7 @@ class AuthViews(Resource):
         }
 
 
-@api.route('/register')
+@api.route('/register/')
 class RegisterView(Resource):
     def post(self):
         email = request.json.get('email')

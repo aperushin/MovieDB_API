@@ -8,7 +8,7 @@ from app.auth import generate_hash
 
 class UsersService:
 
-    UPDATEBLE_FIELDS = {'name', 'surname', 'favorite_genre'}
+    UPDATEBLE_FIELDS = {'name', 'surname', 'favourite_genre'}
 
     def __init__(self, dao: UserDAO) -> None:
         self.dao = dao
