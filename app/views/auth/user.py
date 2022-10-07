@@ -11,13 +11,23 @@ api = Namespace('user')
 
 @api.route('/')
 class UserViews(Resource):
+    """
+    Get user data
+    """
+    @api.response(401, 'Unauthorized')
     @api.marshal_with(user, code=200, description='OK')
     @auth_required
     def get(self, user_data):
         return user_service.get_item(user_data.get('user_id'))
 
+    @api.response(204, 'Success')
+    @api.response(400, 'Validation error')
+    @api.response(401, 'Unauthorized')
     @auth_required
     def patch(self, user_data):
+        """
+        Update user information
+        """
         user_id = user_data.get('user_id')
         new_user_data = request.json
 
@@ -28,8 +38,13 @@ class UserViews(Resource):
 
 @api.route('/password/')
 class UserPasswordViews(Resource):
+    @api.response(204, 'Success')
+    @api.response(401, 'Unauthorized')
     @auth_required
     def put(self, user_data):
+        """
+        Change user password
+        """
         user = user_service.get_item(user_data.get('user_id'))
 
         old_password = request.json.get('old_password')

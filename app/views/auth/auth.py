@@ -10,6 +10,9 @@ api = Namespace('auth')
 
 @api.route('/login/')
 class AuthViews(Resource):
+    @api.response(200, 'OK')
+    @api.response(400, 'Bad request')
+    @api.response(401, 'Unauthorized')
     def post(self):
         """
         Authorize a user, returning auth tokens
@@ -40,9 +43,15 @@ class AuthViews(Resource):
         return {
             'access_token': access_token,
             'refresh_token': refresh_token
-        }, 201
+        }, 200
 
+    @api.response(200, 'OK')
+    @api.response(400, 'Bad request')
+    @api.response(401, 'Unauthorized')
     def put(self):
+        """
+        Generate a new access token based on refresh token
+        """
         refresh_token = request.json.get('refresh_token')
         if not refresh_token:
             raise BadRequest('Missing refresh token')
@@ -55,12 +64,17 @@ class AuthViews(Resource):
         return {
             'access_token': access_token,
             'refresh_token': refresh_token
-        }
+        }, 200
 
 
 @api.route('/register/')
 class RegisterView(Resource):
+    @api.response(201, 'Created')
+    @api.response(400, 'Validation error')
     def post(self):
+        """
+        Register a new user
+        """
         email = request.json.get('email')
         password = request.json.get('password')
 
