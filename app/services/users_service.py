@@ -1,9 +1,7 @@
-import hmac
-
 from app.dao.main import UserDAO
 from app.exceptions import ItemNotFound
 from app.models import User
-from app.auth import generate_hash
+from app.tools.security import generate_hash
 
 
 class UsersService:
@@ -12,10 +10,6 @@ class UsersService:
 
     def __init__(self, dao: UserDAO) -> None:
         self.dao = dao
-
-    def compare_passwords(self, password: str, password_hash: str):
-        other_password_hash = generate_hash(password)
-        return hmac.compare_digest(password_hash, other_password_hash)
 
     def get_item(self, pk: int) -> User:
         if user := self.dao.get_by_id(pk):

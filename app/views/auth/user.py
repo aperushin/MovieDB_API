@@ -2,7 +2,7 @@ from app.container import user_service
 from flask import request
 from flask_restx import Namespace, Resource
 
-from app.auth import auth_required
+from app.tools.security import auth_required
 from app.setup.api.models import user
 from app.exceptions import BadRequest
 

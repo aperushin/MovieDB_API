@@ -2,8 +2,9 @@ from flask import request
 from flask_restx import Resource, Namespace
 
 from app.container import user_service
-from app.auth import generate_token, decode_token
+from app.tools.security import generate_token, decode_token
 from app.exceptions import BadRequest, NotAuthorized
+from app.tools.security import compare_passwords
 
 api = Namespace('auth')
 
@@ -27,7 +28,7 @@ class AuthViews(Resource):
         if user is None:
             raise NotAuthorized('User not found')
 
-        is_correct_password = user_service.compare_passwords(
+        is_correct_password = compare_passwords(
             password,
             user.password
         )

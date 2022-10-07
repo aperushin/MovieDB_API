@@ -1,7 +1,7 @@
 from flask_restx import Namespace, Resource
 
 from app.container import favorite_movies_service
-from app.auth import auth_required
+from app.tools.security import auth_required
 from app.setup.api.models import movie
 
 api = Namespace('favorites')
