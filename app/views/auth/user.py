@@ -2,7 +2,7 @@ from app.container import user_service
 from flask import request
 from flask_restx import Namespace, Resource
 
-from app.tools.security import auth_required
+from app.tools.security import auth_required, compare_passwords
 from app.setup.api.models import user
 from app.exceptions import BadRequest
 
@@ -50,7 +50,7 @@ class UserPasswordViews(Resource):
         old_password = request.json.get('old_password')
         new_password = request.json.get('new_password')
 
-        if not user_service.compare_passwords(old_password, user.password):
+        if not compare_passwords(old_password, user.password):
             raise BadRequest('Old password is incorrect')
 
         user_service.update_password(user.id, new_password)
