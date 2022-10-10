@@ -21,7 +21,7 @@ class MovieDAO(BaseDAO[Movie]):
         stmt: BaseQuery = self._db_session.query(self.__model__)
 
         if status == 'new':
-            stmt = stmt.order_by(Movie.created.desc())
+            stmt = stmt.order_by(Movie.year.desc())
 
         if page:
             try:
