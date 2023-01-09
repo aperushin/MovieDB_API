@@ -22,9 +22,9 @@ class Movie(models.Base):
     __tablename__ = 'movies'
 
     id = Column(Integer, primary_key=True)
-    title = Column(String(255), nullable=False)
-    description = Column(String(255), nullable=False)
-    trailer = Column(String(255), nullable=False)
+    title = Column(String(2550), nullable=False)
+    description = Column(String(25500), nullable=False)
+    trailer = Column(String(2550), nullable=False)
     year = Column(Integer, nullable=False)
     rating = Column(Float, nullable=False)
     genre_id = Column(Integer, ForeignKey(f'{Genre.__tablename__}.id'), nullable=False)

@@ -14,9 +14,9 @@ director: Model = api.model('Режиссёр', {
 
 movie: Model = api.model('Фильм', {
     'id': fields.Integer(required=True, example=1),
-    'title': fields.String(required=True, max_length=255, example='Batman'),
-    'description': fields.String(required=True, max_length=255, example='Описание'),
-    'trailer': fields.String(required=True, max_length=255, example='https://www.youtube.com/watch?v=dQw4w9WgXcQ'),
+    'title': fields.String(required=True, max_length=2550, example='Batman'),
+    'description': fields.String(required=True, max_length=25500, example='Описание'),
+    'trailer': fields.String(required=True, max_length=2550, example='https://www.youtube.com/watch?v=dQw4w9WgXcQ'),
     'year': fields.Integer(required=True, example=1999),
     'rating': fields.Float(required=True, example=6.9),
     'genre_id': fields.Integer(required=True, example=1),

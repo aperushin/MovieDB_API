@@ -35,7 +35,8 @@ class TestingConfig(BaseConfig):
 class DevelopmentConfig(BaseConfig):
     DEBUG = True
     SQLALCHEMY_ECHO = True
-    SQLALCHEMY_DATABASE_URI = "sqlite:///" + BASE_DIR.joinpath('app.db').as_posix()
+    # SQLALCHEMY_DATABASE_URI = "sqlite:///" + BASE_DIR.joinpath('app.db').as_posix()
+    SQLALCHEMY_DATABASE_URI = "postgresql://test:12345@db:5432"
 
 
 class ProductionConfig(BaseConfig):
@@ -48,13 +49,14 @@ class ConfigFactory:
 
     @classmethod
     def get_config(cls) -> Type[BaseConfig]:
-        if cls.flask_env == 'development':
-            return DevelopmentConfig
-        elif cls.flask_env == 'production':
-            return ProductionConfig
-        elif cls.flask_env == 'testing':
-            return TestingConfig
-        raise NotImplementedError
+        # if cls.flask_env == 'development':
+        #     return DevelopmentConfig
+        # elif cls.flask_env == 'production':
+        #     return ProductionConfig
+        # elif cls.flask_env == 'testing':
+        #     return TestingConfig
+        # raise NotImplementedError
+        return DevelopmentConfig
 
 
 config = ConfigFactory.get_config()
