@@ -6,3 +6,9 @@ jobs:
     steps:
       - name: clone code
         uses: actions/checkout@v2
+      - name: docker build
+        run: docker build -t aperushin/sky_hw26:$GITHUB_REF_NAME-$GITHUB_RUN_ID
+      - name: docker login
+        run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB-UNAME }} --password-stdin
+      - name: docker push
+        run: docker push aperushin/sky_hw26:$GITHUB_REF_NAME-$GITHUB_RUN_ID -u $DOCKERHUB-UNAME
