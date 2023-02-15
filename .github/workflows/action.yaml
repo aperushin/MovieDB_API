@@ -11,4 +11,4 @@ jobs:
       - name: docker login
         run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_UNAME }} --password-stdin
       - name: docker push
-        run: docker push aperushin/sky_hw26:$GITHUB_REF_NAME-$GITHUB_RUN_ID -u $DOCKERHUB-UNAME
+        run: docker push aperushin/sky_hw26:$GITHUB_REF_NAME-$GITHUB_RUN_ID
