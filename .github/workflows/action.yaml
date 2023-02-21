@@ -23,16 +23,17 @@ jobs:
           mkdir deploy
           cat docker-compose-ci.yaml | envsubst > deploy/docker-compose.yaml
       - name: clone files to server
-        uses: appleboy/scp-action@master
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_UNAME }}
           password: ${{ secrets.SSH_PASS }}
+          port: "22"
           source: "deploy/docker-compose.yaml"
           target: "flask_app_ci"
           strip_components: 1
       - name: run docker-compose
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v0.1.7
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_UNAME }}
