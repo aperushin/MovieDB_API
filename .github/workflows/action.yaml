@@ -28,7 +28,6 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_UNAME }}
           key: ${{ secrets.SSH_KEY }}
-          password: ${{ secrets.SSH_PASS }}
           source: "deploy/docker-compose.yaml"
           target: "flask_app_ci"
           strip_components: 1
@@ -38,7 +37,6 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_UNAME }}
           key: ${{ secrets.SSH_KEY }}
-          password: ${{ secrets.SSH_PASS }}
           script: |
             cd flask_app_ci
             echo ${{ secrets.SSH_PASS }} | sudo -S docker-compose up -d
