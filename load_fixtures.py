@@ -22,6 +22,8 @@ if __name__ == '__main__':
     app = create_app(config)
 
     with app.app_context():
+        db.create_all()
+
         load_data(fixtures['genres'], Genre)
         load_data(fixtures['directors'], Director)
         load_data(fixtures['movies'], Movie)

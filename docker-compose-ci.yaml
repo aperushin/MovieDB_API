@@ -35,4 +35,4 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    command: python -m create_tables && python -m load_fixtures
+    command: python -m load_fixtures
