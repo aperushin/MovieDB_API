@@ -28,12 +28,11 @@ services:
         condition: service_started
 
   migrations:
-    build:
-      context: .
-      dockerfile: mig.Dockerfile
+    image: aperushin/sky_hw26:$GITHUB_REF_NAME-$GITHUB_RUN_ID
     environment:
       FLASK_APP: run.py
       FLASK_ENV: development
     depends_on:
       db:
         condition: service_healthy
+    command: python -m create_tables && python -m load_fixtures
